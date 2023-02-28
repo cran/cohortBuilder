@@ -88,28 +88,31 @@ librarian_cohort %>%
 sum_up(librarian_cohort)
 
 ## -----------------------------------------------------------------------------
-code(librarian_cohort)
+code(librarian_cohort, include_methods = NULL)
 
 new_source <- set_source(
   as.tblist(librarian),
   source_code = quote({
-    source <- list(attributes = list(datasets = librarian))
+    source <- list()
+    source$dtconn <- as.tblist(librarian)
   })
 )
 
 update_source(librarian_cohort, new_source)
-code(librarian_cohort)
 sum_up(librarian_cohort)
-code(librarian_cohort)
+code(librarian_cohort, include_methods = NULL)
 
 ## -----------------------------------------------------------------------------
 update_source(librarian_cohort, new_source, keep_steps = FALSE)
 sum_up(librarian_cohort)
 
 ## -----------------------------------------------------------------------------
+new_source <- set_source(
+  as.tblist(librarian)
+)
 empty_cohort <- cohort()
-update_source(librarian_cohort, new_source)
-sum_up(empty_cohort)
+update_source(empty_cohort, new_source)
+code(empty_cohort, include_methods = NULL)
 
 ## -----------------------------------------------------------------------------
 source_one <- set_source(

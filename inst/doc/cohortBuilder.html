@@ -14,25 +14,38 @@
 
 <title>Introduction to cohortBuilder</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -50,55 +63,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -107,13 +119,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -125,7 +144,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -141,39 +340,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>This document presents to you basic functionality offered by <code>cohortBuilder</code> package. You’ll learn here about Source and Cohort objects, how to configure them with filters and filtering steps. Later on, we’ll present most common Cohort methods that allow to manipulate the object and extract useful information about Cohort data and state.</p>
+<p>This document presents to you basic functionality offered by
+<code>cohortBuilder</code> package. You’ll learn here about Source and
+Cohort objects, how to configure them with filters and filtering steps.
+Later on, we’ll present most common Cohort methods that allow to
+manipulate the object and extract useful information about Cohort data
+and state.</p>
 <div id="cohortbuilder-vs.-dplyr" class="section level2">
 <h2>cohortBuilder vs. dplyr</h2>
-<p>If you’re familiar with <code>dplyr</code> (or any other data manipulation package) you may be wondering what <code>cohortBuilder</code> has been created for.</p>
-<p>Our main goal for creating <code>cohortBuilder</code> was to provide a common syntax for operating (filtering) on any data source you need. This follows the idea for having <code>dplyr</code> and its database counterpart <code>dbplyr</code> package.</p>
-<p>In order to achieve the goal, we put an emphasis on possibility to write custom extensions in terms of data source type, or operating backend (underneath <code>cohortBuilder</code> uses <code>dplyr</code> to operate on data frames, but you may create an extension using e.g. <code>data.table</code>). See <code>vignette(&quot;custom-extensions&quot;)</code>.</p>
-<p>The second goal was integration of <code>cohortBuilder</code> with <code>shiny</code>. The GUI for <code>cohortBuilder</code> is provided by <code>shinyCohortBuilder</code> package. With this extension you may easily open Cohort configuration panel locally, or include it in you custom dashboard.</p>
+<p>If you’re familiar with <code>dplyr</code> (or any other data
+manipulation package) you may be wondering what
+<code>cohortBuilder</code> has been created for.</p>
+<p>Our main goal for creating <code>cohortBuilder</code> was to provide
+a common syntax for operating (filtering) on any data source you need.
+This follows the idea for having <code>dplyr</code> and its database
+counterpart <code>dbplyr</code> package.</p>
+<p>In order to achieve the goal, we put an emphasis on possibility to
+write custom extensions in terms of data source type, or operating
+backend (underneath <code>cohortBuilder</code> uses <code>dplyr</code>
+to operate on data frames, but you may create an extension using
+e.g. <code>data.table</code>). See
+<code>vignette(&quot;custom-extensions&quot;)</code>.</p>
+<p>The second goal was integration of <code>cohortBuilder</code> with
+<code>shiny</code>. The GUI for <code>cohortBuilder</code> is provided
+by <code>shinyCohortBuilder</code> package. With this extension you may
+easily open Cohort configuration panel locally, or include it in you
+custom dashboard.</p>
 </div>
 <div id="data-librarian" class="section level2">
 <h2>Data: librarian</h2>
-<p>To present <code>cohortBuilder</code>’s functionality we’ll be operating on <code>librarian</code> dataset. <code>librarian</code> is a list of four tables, storing a sample of book library management database.</p>
+<p>To present <code>cohortBuilder</code>’s functionality we’ll be
+operating on <code>librarian</code> dataset. <code>librarian</code> is a
+list of four tables, storing a sample of book library management
+database.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cohortBuilder<span class="sc">::</span>librarian</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $books</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 17 × 6</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn              title             genre         publisher  author     copies</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9     The Da Vinci Code Crime, Thril… Transworld Dan Brown       7</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-7679-0817-1     A Short History … Popular Scie… Transworld Bill Brys…      4</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 978-0-15-602943-8 The Time Travele… General &amp; Li… Random Ho… Audrey Ni…      2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0-224-06252-2     Atonement         General &amp; Li… Random Ho… Ian McEwan      8</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 0-676-97376-0     Life of Pi        General &amp; Li… Canongate  Yann Mart…     11</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 12 more rows</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn              title                            genre publi…¹ author copies</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;                            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9     The Da Vinci Code                Crim… Transw… Dan B…      7</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-7679-0817-1     A Short History of Nearly Every… Popu… Transw… Bill …      4</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 978-0-15-602943-8 The Time Traveler&#39;s Wife         Gene… Random… Audre…      2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0-224-06252-2     Atonement                        Gene… Random… Ian M…      8</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 0-676-97376-0     Life of Pi                       Gene… Canong… Yann …     11</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 12 more rows, and abbreviated variable name ¹​publisher</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 20 × 6</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                  name           phone_number program</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                    &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;  </span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. No… Mrs. Freddie … 626-594-4729 premium</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 2002-08-10 8196 Windsor Road Musca… Ms. Jada Lesch 919-530-5272 standa…</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 2003-02-15 6 Wood Lane Calumet Cit… Inga Dach      706-669-5694 &lt;NA&gt;   </span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 2004-06-14 18 Nut Swamp Road Merri… Keyshawn Scha… 746-328-6598 standa…</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 2005-01-15 580 Chapel Rd. Delray B… Ferdinand Ber… 127-363-0738 premium</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                                name  phone…¹ program</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                                  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. Norristown, PA 1… Mrs.… 626-59… premium</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 2002-08-10 8196 Windsor Road Muscatine, IA 52761  Ms. … 919-53… standa…</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 2003-02-15 6 Wood Lane Calumet City, IL 60409     Inga… 706-66… &lt;NA&gt;   </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 2004-06-14 18 Nut Swamp Road Merrimack, NH 03054  Keys… 746-32… standa…</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 2005-01-15 580 Chapel Rd. Delray Beach, FL 33445  Ferd… 127-36… premium</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows, and abbreviated variable name ¹​phone_number</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
@@ -200,12 +421,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="source-object" class="section level2">
 <h2>Source object</h2>
-<p>Every time you work with <code>cohortBuilder</code> the crucial part is to properly define the data source with <code>set_source</code> function. Source is an R6 object storing metadata about data and its origin. The metadata allows <code>cohortBuilder</code> to distinct what methods to use when performing operations on it.</p>
+<p>Every time you work with <code>cohortBuilder</code> the crucial part
+is to properly define the data source with <code>set_source</code>
+function. Source is an R6 object storing metadata about data and its
+origin. The metadata allows <code>cohortBuilder</code> to distinct what
+methods to use when performing operations on it.</p>
 <p>To define a new source you need to provide data (connection).</p>
-<p>Let’s create now a new source storing <code>librarian</code> data. To do so, we pass one obligatory parameter <code>dtconn</code> to <code>set_source</code> method.</p>
-<p><code>dtconn</code> stores data connection responsible for informing <code>cohortBuilder</code> on what data are we gonna work (and what extension to use, if any).</p>
-<p>If you want to operate on R-loaded list of tables, provide <code>tblist</code> class object. <code>tblist</code> is just a named list of data frames having <code>tblist</code> class.</p>
-<p><strong>Note.</strong> In order to create ‘tblist’ object use <code>tblist</code>, e.g. <code>tblist(mtcars, iris)</code>. <strong>Note.</strong> In order to convert list of data frames to ‘tblist’ just use <code>as.tblist</code>.</p>
+<p>Let’s create now a new source storing <code>librarian</code> data. To
+do so, we pass one obligatory parameter <code>dtconn</code> to
+<code>set_source</code> method.</p>
+<p><code>dtconn</code> stores data connection responsible for informing
+<code>cohortBuilder</code> on what data are we gonna work (and what
+extension to use, if any).</p>
+<p>If you want to operate on R-loaded list of tables, provide
+<code>tblist</code> class object. <code>tblist</code> is just a named
+list of data frames having <code>tblist</code> class.</p>
+<p><strong>Note.</strong> In order to create ‘tblist’ object use
+<code>tblist</code>, e.g. <code>tblist(mtcars, iris)</code>.
+<strong>Note.</strong> In order to convert list of data frames to
+‘tblist’ just use <code>as.tblist</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">as.tblist</span>(librarian), <span class="at">max.level =</span> <span class="dv">1</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; List of 4</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ books    : tibble [17 × 6] (S3: tbl_df/tbl/data.frame)</span></span>
@@ -219,11 +453,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(librarian_source)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tblist&quot; &quot;Source&quot; &quot;R6&quot;</span></span></code></pre></div>
-<p>To learn more about <code>set_source</code>’s arguments check <code>?set_source</code>.</p>
+<p>To learn more about <code>set_source</code>’s arguments check
+<code>?set_source</code>.</p>
 </div>
 <div id="cohort-object" class="section level2">
 <h2>Cohort object</h2>
-<p>When <code>Source</code> object is ready, the next step is to create a <code>Cohort</code> object. <code>Cohort</code> is again an R6 object, providing methods for operating on data included in <code>Source</code>.</p>
+<p>When <code>Source</code> object is ready, the next step is to create
+a <code>Cohort</code> object. <code>Cohort</code> is again an R6 object,
+providing methods for operating on data included in
+<code>Source</code>.</p>
 <p><code>Cohort</code> is responsible in particular for:</p>
 <ul>
 <li>storing definitions of filters (and filtering steps),</li>
@@ -231,34 +469,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>computing and caching filter and data statistics,</li>
 <li>keeping and updating filtering configuration state.</li>
 </ul>
-<p>In the standard workflow we build <code>Cohort</code> on top of <code>Source</code>. We achieve it with <code>cohort</code> function:</p>
+<p>In the standard workflow we build <code>Cohort</code> on top of
+<code>Source</code>. We achieve it with <code>cohort</code>
+function:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="ot">&lt;-</span> librarian_source <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cohort</span>()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(librarian_cohort)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Cohort&quot; &quot;R6&quot;</span></span></code></pre></div>
-<p>With the existing <code>Cohort</code> we may get underlying data with <code>get_data</code>:</p>
+<p>With the existing <code>Cohort</code> we may get underlying data with
+<code>get_data</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_data</span>(librarian_cohort)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $books</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 17 × 6</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn              title             genre         publisher  author     copies</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9     The Da Vinci Code Crime, Thril… Transworld Dan Brown       7</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-7679-0817-1     A Short History … Popular Scie… Transworld Bill Brys…      4</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 978-0-15-602943-8 The Time Travele… General &amp; Li… Random Ho… Audrey Ni…      2</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0-224-06252-2     Atonement         General &amp; Li… Random Ho… Ian McEwan      8</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 0-676-97376-0     Life of Pi        General &amp; Li… Canongate  Yann Mart…     11</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 12 more rows</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn              title                            genre publi…¹ author copies</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;                            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9     The Da Vinci Code                Crim… Transw… Dan B…      7</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-7679-0817-1     A Short History of Nearly Every… Popu… Transw… Bill …      4</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 978-0-15-602943-8 The Time Traveler&#39;s Wife         Gene… Random… Audre…      2</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0-224-06252-2     Atonement                        Gene… Random… Ian M…      8</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 0-676-97376-0     Life of Pi                       Gene… Canong… Yann …     11</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 12 more rows, and abbreviated variable name ¹​publisher</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 20 × 6</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                  name           phone_number program</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                    &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;  </span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. No… Mrs. Freddie … 626-594-4729 premium</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 2002-08-10 8196 Windsor Road Musca… Ms. Jada Lesch 919-530-5272 standa…</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 2003-02-15 6 Wood Lane Calumet Cit… Inga Dach      706-669-5694 &lt;NA&gt;   </span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 2004-06-14 18 Nut Swamp Road Merri… Keyshawn Scha… 746-328-6598 standa…</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 2005-01-15 580 Chapel Rd. Delray B… Ferdinand Ber… 127-363-0738 premium</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                                name  phone…¹ program</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                                  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. Norristown, PA 1… Mrs.… 626-59… premium</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 2002-08-10 8196 Windsor Road Muscatine, IA 52761  Ms. … 919-53… standa…</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 2003-02-15 6 Wood Lane Calumet City, IL 60409     Inga… 706-66… &lt;NA&gt;   </span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 2004-06-14 18 Nut Swamp Road Merrimack, NH 03054  Keys… 746-32… standa…</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 2005-01-15 580 Chapel Rd. Delray Beach, FL 33445  Ferd… 127-36… premium</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows, and abbreviated variable name ¹​phone_number</span></span>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
@@ -290,22 +531,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="configuring-and-running-filters" class="section level2">
 <h2>Configuring and running filters</h2>
-<p>The next step in <code>cohortBuilder</code> workflow is configuration of filters. Filters are responsible for providing necessary logic for performing related data filtering.</p>
-<p>The extensive description of filters can be found at <code>vignette(&quot;custom-filters&quot;)</code>.</p>
-<p>The current version of <code>cohortBuilder</code> provides five types of build-in filters:</p>
+<p>The next step in <code>cohortBuilder</code> workflow is configuration
+of filters. Filters are responsible for providing necessary logic for
+performing related data filtering.</p>
+<p>The extensive description of filters can be found at
+<code>vignette(&quot;custom-filters&quot;)</code>.</p>
+<p>The current version of <code>cohortBuilder</code> provides five types
+of build-in filters:</p>
 <ul>
-<li><strong>discrete</strong> - return values (in column) matching provided set,</li>
-<li><strong>discrete_text</strong> - return values based on provided comma separated values,</li>
-<li><strong>range</strong> - return values within the provided range,</li>
+<li><strong>discrete</strong> - return values (in column) matching
+provided set,</li>
+<li><strong>discrete_text</strong> - return values based on provided
+comma separated values,</li>
+<li><strong>range</strong> - return values within the provided
+range,</li>
 <li><strong>date_range</strong> - range version for Date type data,</li>
-<li><strong>multi_discrete</strong> - extended version of discrete filter working with multiple conditions.</li>
+<li><strong>multi_discrete</strong> - extended version of discrete
+filter working with multiple conditions.</li>
 </ul>
-<p>Let’s define discrete filter that will subset <code>books</code> table listing books written by Dan Brown.<br />
-To do so, we have to define the following parameters calling <code>filter</code> function:</p>
+<p>Let’s define discrete filter that will subset <code>books</code>
+table listing books written by Dan Brown.<br />
+To do so, we have to define the following parameters calling
+<code>filter</code> function:</p>
 <ul>
 <li><code>type</code> - type of the filter (one of the above),</li>
-<li><code>dataset</code> - name of the dataset to apply the filter to,</li>
-<li><code>variable</code> - name of the variable in <code>dataset</code> to apply the filter to,</li>
+<li><code>dataset</code> - name of the dataset to apply the filter
+to,</li>
+<li><code>variable</code> - name of the variable in <code>dataset</code>
+to apply the filter to,</li>
 <li><code>value</code> - vector of values to be applied in filter.</li>
 </ul>
 <p>So in our case:</p>
@@ -315,10 +568,12 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">&quot;author&quot;</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="st">&quot;Dan Brown&quot;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>In order to add the filter to existing Cohort we may use <code>add_filter</code> method:</p>
+<p>In order to add the filter to existing Cohort we may use
+<code>add_filter</code> method:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="ot">&lt;-</span> librarian_cohort <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_filter</span>(author_filter)</span></code></pre></div>
-<p>Alternatively we may use <code>%-&gt;%</code> operator that calls <code>add_filter</code> underneath:</p>
+<p>Alternatively we may use <code>%-&gt;%</code> operator that calls
+<code>add_filter</code> underneath:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="ot">&lt;-</span> librarian_cohort <span class="sc">%-&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  author_filter</span></code></pre></div>
 <p>Or define the filter while creating Cohort:</p>
@@ -326,16 +581,19 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cohort</span>(</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    author_filter</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p>There are much more options for defining filters. To learn more check <code>vignette(&quot;cohort-configuration&quot;)</code>.</p>
-<p><strong>Note.</strong> Cohort is an R6 object, so you may skip reassignment above.</p>
+<p>There are much more options for defining filters. To learn more check
+<code>vignette(&quot;cohort-configuration&quot;)</code>.</p>
+<p><strong>Note.</strong> Cohort is an R6 object, so you may skip
+reassignment above.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_filter</span>(author_filter)</span></code></pre></div>
 <p>will also work.</p>
-<p><strong>Note.</strong> To verify if the filter was configured properly just run:</p>
+<p><strong>Note.</strong> To verify if the filter was configured
+properly just run:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum_up</span>(librarian_cohort)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt;&gt; Step ID: 1</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -&gt; Filter ID: UJZCZ1654076765273</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -&gt; Filter ID: CIAAS1677592003346</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Filter Type: discrete</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Filter Parameters:</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      dataset: books</span></span>
@@ -344,58 +602,69 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      keep_na: TRUE</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      description: </span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      active: TRUE</span></span></code></pre></div>
-<p>The output highlights list of configured filters along with their parameters. You can see here the id attached to filter and some extra parameters such as <code>keep_na</code> or <code>active</code> which we describe in the next sections.</p>
-<p>More to that we can realize the filter was defined in the step with ID equals to 1. That’s because <code>cohortBuilder</code> allows to perform <a href="#multi-stage-filtering">multi-stage filtering</a>.</p>
-<p>Let’s get back to filtering the <code>books</code>. Configuring filters only adds proper metadata in the Cohort object, which means data filtering is not performed automatically. This allows to set the proper configuration first, and run calculation only once.</p>
+<p>The output highlights list of configured filters along with their
+parameters. You can see here the id attached to filter and some extra
+parameters such as <code>keep_na</code> or <code>active</code> which we
+describe in the next sections.</p>
+<p>More to that we can realize the filter was defined in the step with
+ID equals to 1. That’s because <code>cohortBuilder</code> allows to
+perform <a href="#multi-stage-filtering">multi-stage filtering</a>.</p>
+<p>Let’s get back to filtering the <code>books</code>. Configuring
+filters only adds proper metadata in the Cohort object, which means data
+filtering is not performed automatically. This allows to set the proper
+configuration first, and run calculation only once.</p>
 <p>If you want to run data filtering, just call <code>run</code>:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span>(librarian_cohort)</span></code></pre></div>
-<p>Let’s check if the operation worked fine by checking the resulting data:</p>
+<p>Let’s check if the operation worked fine by checking the resulting
+data:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_data</span>(librarian_cohort)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $books</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 6</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn          title             genre                publisher  author  copies</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;             &lt;chr&gt;                &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9 The Da Vinci Code Crime, Thriller &amp; A… Transworld Dan Br…      7</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-671-02735-2 Angels and Demons Crime, Thriller &amp; A… Transworld Dan Br…      4</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 20 × 6</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                  name           phone_number program</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                    &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;  </span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. No… Mrs. Freddie … 626-594-4729 premium</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 2002-08-10 8196 Windsor Road Musca… Ms. Jada Lesch 919-530-5272 standa…</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 2003-02-15 6 Wood Lane Calumet Cit… Inga Dach      706-669-5694 &lt;NA&gt;   </span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 2004-06-14 18 Nut Swamp Road Merri… Keyshawn Scha… 746-328-6598 standa…</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 2005-01-15 580 Chapel Rd. Delray B… Ferdinand Ber… 127-363-0738 premium</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     borrower_id isbn              date      </span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;             &lt;date&gt;    </span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 000019      0-676-97976-9     2015-03-17</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 000010      978-0-7528-6053-4 2008-09-13</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 000016      0-09-177373-3     2014-09-28</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 000005      0-224-06252-2     2005-11-14</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 000004      0-340-89696-5     2006-03-19</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 45 more rows</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $returns</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 30 × 2</span></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     date      </span></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;    </span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2015-04-06</span></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000003 2014-10-23</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000004 2005-12-29</span></span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000005 2006-03-26</span></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000006 2016-08-30</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 25 more rows</span></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tblist&quot;</span></span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;call&quot;)</span></span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; as.tblist(librarian)</span></span></code></pre></div>
-<p>If you want to run data filtering automatically when the filter is defined you can set <code>run_flow = TRUE</code>:</p>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn          title             genre                    publi…¹ author copies</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;             &lt;chr&gt;                    &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9 The Da Vinci Code Crime, Thriller &amp; Adven… Transw… Dan B…      7</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-671-02735-2 Angels and Demons Crime, Thriller &amp; Adven… Transw… Dan B…      4</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable name ¹​publisher</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 20 × 6</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                                name  phone…¹ program</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                                  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. Norristown, PA 1… Mrs.… 626-59… premium</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 2002-08-10 8196 Windsor Road Muscatine, IA 52761  Ms. … 919-53… standa…</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 2003-02-15 6 Wood Lane Calumet City, IL 60409     Inga… 706-66… &lt;NA&gt;   </span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 2004-06-14 18 Nut Swamp Road Merrimack, NH 03054  Keys… 746-32… standa…</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 2005-01-15 580 Chapel Rd. Delray Beach, FL 33445  Ferd… 127-36… premium</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows, and abbreviated variable name ¹​phone_number</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     borrower_id isbn              date      </span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;             &lt;date&gt;    </span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 000019      0-676-97976-9     2015-03-17</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 000010      978-0-7528-6053-4 2008-09-13</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 000016      0-09-177373-3     2014-09-28</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 000005      0-224-06252-2     2005-11-14</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 000004      0-340-89696-5     2006-03-19</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 45 more rows</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $returns</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 30 × 2</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     date      </span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;    </span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2015-04-06</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000003 2014-10-23</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000004 2005-12-29</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000005 2006-03-26</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000006 2016-08-30</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 25 more rows</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tblist&quot;</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;call&quot;)</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; as.tblist(librarian)</span></span></code></pre></div>
+<p>If you want to run data filtering automatically when the filter is
+defined you can set <code>run_flow = TRUE</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="ot">&lt;-</span> librarian_source <span class="sc">%&gt;%</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cohort</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_filter</span>(author_filter, <span class="at">run_flow =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
@@ -406,29 +675,31 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">run_flow =</span> <span class="cn">TRUE</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>when configuring filter along with creating cohort.</p>
-<p>Now when the data filtered, how can we get data state before filtering? With <code>get_data</code> it’s easy, just set <code>state = &quot;pre&quot;</code>:</p>
+<p>Now when the data filtered, how can we get data state before
+filtering? With <code>get_data</code> it’s easy, just set
+<code>state = &quot;pre&quot;</code>:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_data</span>(librarian_cohort, <span class="at">state =</span> <span class="st">&quot;pre&quot;</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $books</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 17 × 6</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn              title             genre         publisher  author     copies</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt;</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9     The Da Vinci Code Crime, Thril… Transworld Dan Brown       7</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-7679-0817-1     A Short History … Popular Scie… Transworld Bill Brys…      4</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 978-0-15-602943-8 The Time Travele… General &amp; Li… Random Ho… Audrey Ni…      2</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0-224-06252-2     Atonement         General &amp; Li… Random Ho… Ian McEwan      8</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 0-676-97376-0     Life of Pi        General &amp; Li… Canongate  Yann Mart…     11</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 12 more rows</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn              title                            genre publi…¹ author copies</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;                            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9     The Da Vinci Code                Crim… Transw… Dan B…      7</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-7679-0817-1     A Short History of Nearly Every… Popu… Transw… Bill …      4</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 978-0-15-602943-8 The Time Traveler&#39;s Wife         Gene… Random… Audre…      2</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0-224-06252-2     Atonement                        Gene… Random… Ian M…      8</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 0-676-97376-0     Life of Pi                       Gene… Canong… Yann …     11</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 12 more rows, and abbreviated variable name ¹​publisher</span></span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 20 × 6</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                  name           phone_number program</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                    &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;  </span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. No… Mrs. Freddie … 626-594-4729 premium</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 2002-08-10 8196 Windsor Road Musca… Ms. Jada Lesch 919-530-5272 standa…</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 2003-02-15 6 Wood Lane Calumet Cit… Inga Dach      706-669-5694 &lt;NA&gt;   </span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 2004-06-14 18 Nut Swamp Road Merri… Keyshawn Scha… 746-328-6598 standa…</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 2005-01-15 580 Chapel Rd. Delray B… Ferdinand Ber… 127-363-0738 premium</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                                name  phone…¹ program</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                                  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. Norristown, PA 1… Mrs.… 626-59… premium</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 2002-08-10 8196 Windsor Road Muscatine, IA 52761  Ms. … 919-53… standa…</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 2003-02-15 6 Wood Lane Calumet City, IL 60409     Inga… 706-66… &lt;NA&gt;   </span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 2004-06-14 18 Nut Swamp Road Merrimack, NH 03054  Keys… 746-32… standa…</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 2005-01-15 580 Chapel Rd. Delray Beach, FL 33445  Ferd… 127-36… premium</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows, and abbreviated variable name ¹​phone_number</span></span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
 <span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
@@ -459,15 +730,19 @@ To do so, we have to define the following parameters calling <code>filter</code>
 </div>
 <div id="multi-stage-filtering" class="section level2">
 <h2>Multi-stage filtering</h2>
-<p>With <code>cohortBuilder</code> you can define filters in groups named ‘steps’ or ‘filtering steps’.</p>
-<p>Filtering steps allow you to sequentially perform groups of filtering operations. In order to define step, just wrap set of filters in <code>step</code> function.</p>
+<p>With <code>cohortBuilder</code> you can define filters in groups
+named ‘steps’ or ‘filtering steps’.</p>
+<p>Filtering steps allow you to sequentially perform groups of filtering
+operations. In order to define step, just wrap set of filters in
+<code>step</code> function.</p>
 <p>We will define three filters:</p>
 <ol style="list-style-type: decimal">
 <li>Taking all the books written by Dan Brown.</li>
 <li>Filtering only the members (borrowers) with “standard” program.</li>
 <li>Taking only the books with less than 5 copies.</li>
 </ol>
-<p>We’ll include filters 1. and 2. in the first step - filter 3. in the second one.</p>
+<p>We’ll include filters 1. and 2. in the first step - filter 3. in the
+second one.</p>
 <p>The below code does the job:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="ot">&lt;-</span> librarian_source <span class="sc">%&gt;%</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cohort</span>(</span>
@@ -490,9 +765,15 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Let’s note a few parts that occurred above:</p>
 <ul>
-<li>For each filter we defined <code>id</code> parameter. This assigns provided id to each filter what makes accessing it later much easier.</li>
-<li>For ‘program’ filter we set <code>keep_na = FALSE</code> what results with excluding <code>NA</code> values (the parameter is available for each filter type).</li>
-<li>For filtering number of copies we’ve used <code>range</code> filter, for which sub-setting value is defined with <code>range</code> parameter.</li>
+<li>For each filter we defined <code>id</code> parameter. This assigns
+provided id to each filter what makes accessing it later much
+easier.</li>
+<li>For ‘program’ filter we set <code>keep_na = FALSE</code> what
+results with excluding <code>NA</code> values (the parameter is
+available for each filter type).</li>
+<li>For filtering number of copies we’ve used <code>range</code> filter,
+for which sub-setting value is defined with <code>range</code>
+parameter.</li>
 </ul>
 <p>Let’s check the Cohort configuration:,</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum_up</span>(librarian_cohort)</span>
@@ -526,99 +807,107 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      description: </span></span>
 <span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      active: TRUE</span></span></code></pre></div>
 <p>We can see filters were correctly assigned to each step.</p>
-<p>Having multiple steps defined, we can use <code>get_data</code> to extract resulting data after each step. In order to precise the step we want to get data from, just pass its id as <code>step_id</code> parameter:</p>
+<p>Having multiple steps defined, we can use <code>get_data</code> to
+extract resulting data after each step. In order to precise the step we
+want to get data from, just pass its id as <code>step_id</code>
+parameter:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span>(librarian_cohort)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_data</span>(librarian_cohort, <span class="at">step_id =</span> <span class="dv">1</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $books</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 6</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn          title             genre                publisher  author  copies</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;             &lt;chr&gt;                &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt;</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9 The Da Vinci Code Crime, Thriller &amp; A… Transworld Dan Br…      7</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-671-02735-2 Angels and Demons Crime, Thriller &amp; A… Transworld Dan Br…      4</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 6</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                  name           phone_number program</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                    &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;  </span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. No… Mrs. Freddie … 626-594-4729 premium</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000005 2005-01-15 580 Chapel Rd. Delray B… Ferdinand Ber… 127-363-0738 premium</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000008 2006-11-15 9533 Delaware Dr. Peabo… Mrs. Ermine H… 460-779-8714 premium</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000011 2009-03-24 745 E. Sussex Drive Mah… Mr. Sullivan … 378-884-6509 premium</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000013 2011-09-30 534 Iroquois Ave. Water… Dr. Sharif Ku… 104-832-8013 premium</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1 more row</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     borrower_id isbn              date      </span></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;             &lt;date&gt;    </span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 000019      0-676-97976-9     2015-03-17</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 000010      978-0-7528-6053-4 2008-09-13</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 000016      0-09-177373-3     2014-09-28</span></span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 000005      0-224-06252-2     2005-11-14</span></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 000004      0-340-89696-5     2006-03-19</span></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 45 more rows</span></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $returns</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 30 × 2</span></span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     date      </span></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;    </span></span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2015-04-06</span></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000003 2014-10-23</span></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000004 2005-12-29</span></span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000005 2006-03-26</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000006 2016-08-30</span></span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 25 more rows</span></span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tblist&quot;</span></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;call&quot;)</span></span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; as.tblist(librarian)</span></span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="fu">get_data</span>(librarian_cohort, <span class="at">step_id =</span> <span class="dv">2</span>)</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $books</span></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 6</span></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn          title             genre                publisher  author  copies</span></span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;             &lt;chr&gt;                &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt;</span></span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-671-02735-2 Angels and Demons Crime, Thriller &amp; A… Transworld Dan Br…      4</span></span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 6</span></span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                  name           phone_number program</span></span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                    &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;  </span></span>
-<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. No… Mrs. Freddie … 626-594-4729 premium</span></span>
-<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000005 2005-01-15 580 Chapel Rd. Delray B… Ferdinand Ber… 127-363-0738 premium</span></span>
-<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000008 2006-11-15 9533 Delaware Dr. Peabo… Mrs. Ermine H… 460-779-8714 premium</span></span>
-<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000011 2009-03-24 745 E. Sussex Drive Mah… Mr. Sullivan … 378-884-6509 premium</span></span>
-<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000013 2011-09-30 534 Iroquois Ave. Water… Dr. Sharif Ku… 104-832-8013 premium</span></span>
-<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1 more row</span></span>
-<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
-<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
-<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     borrower_id isbn              date      </span></span>
-<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;             &lt;date&gt;    </span></span>
-<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 000019      0-676-97976-9     2015-03-17</span></span>
-<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 000010      978-0-7528-6053-4 2008-09-13</span></span>
-<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 000016      0-09-177373-3     2014-09-28</span></span>
-<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 000005      0-224-06252-2     2005-11-14</span></span>
-<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 000004      0-340-89696-5     2006-03-19</span></span>
-<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 45 more rows</span></span>
-<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $returns</span></span>
-<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 30 × 2</span></span>
-<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     date      </span></span>
-<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;    </span></span>
-<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2015-04-06</span></span>
-<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000003 2014-10-23</span></span>
-<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000004 2005-12-29</span></span>
-<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000005 2006-03-26</span></span>
-<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000006 2016-08-30</span></span>
-<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 25 more rows</span></span>
-<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
-<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tblist&quot;</span></span>
-<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;call&quot;)</span></span>
-<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; as.tblist(librarian)</span></span></code></pre></div>
-<p><strong>Note.</strong> When <code>step_id</code> is not provided, the method returns the last step data.</p>
-<p><strong>Note.</strong> You may precise if you want to extract data before or after filtering using <code>state</code> parameter. Because the proceeding step uses result from the previous one, we have:</p>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn          title             genre                    publi…¹ author copies</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;             &lt;chr&gt;                    &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-385-50420-9 The Da Vinci Code Crime, Thriller &amp; Adven… Transw… Dan B…      7</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0-671-02735-2 Angels and Demons Crime, Thriller &amp; Adven… Transw… Dan B…      4</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable name ¹​publisher</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 6</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                                name  phone…¹ program</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                                  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. Norristown, PA 1… Mrs.… 626-59… premium</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000005 2005-01-15 580 Chapel Rd. Delray Beach, FL 33445  Ferd… 127-36… premium</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000008 2006-11-15 9533 Delaware Dr. Peabody, MA 01960    Mrs.… 460-77… premium</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000011 2009-03-24 745 E. Sussex Drive Mahwah, NJ 07430   Mr. … 378-88… premium</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000013 2011-09-30 534 Iroquois Ave. Watertown, MA 02472  Dr. … 104-83… premium</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1 more row, and abbreviated variable name ¹​phone_number</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     borrower_id isbn              date      </span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;             &lt;date&gt;    </span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 000019      0-676-97976-9     2015-03-17</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 000010      978-0-7528-6053-4 2008-09-13</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 000016      0-09-177373-3     2014-09-28</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 000005      0-224-06252-2     2005-11-14</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 000004      0-340-89696-5     2006-03-19</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 45 more rows</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $returns</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 30 × 2</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     date      </span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;    </span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2015-04-06</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000003 2014-10-23</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000004 2005-12-29</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000005 2006-03-26</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000006 2016-08-30</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 25 more rows</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tblist&quot;</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;call&quot;)</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; as.tblist(librarian)</span></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="fu">get_data</span>(librarian_cohort, <span class="at">step_id =</span> <span class="dv">2</span>)</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $books</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 6</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   isbn          title             genre                    publi…¹ author copies</span></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;             &lt;chr&gt;                    &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;</span></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0-671-02735-2 Angels and Demons Crime, Thriller &amp; Adven… Transw… Dan B…      4</span></span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable name ¹​publisher</span></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $borrowers</span></span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 6</span></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     registered address                                name  phone…¹ program</span></span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;                                  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2001-06-09 66 N. Evergreen Ave. Norristown, PA 1… Mrs.… 626-59… premium</span></span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000005 2005-01-15 580 Chapel Rd. Delray Beach, FL 33445  Ferd… 127-36… premium</span></span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000008 2006-11-15 9533 Delaware Dr. Peabody, MA 01960    Mrs.… 460-77… premium</span></span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000011 2009-03-24 745 E. Sussex Drive Mahwah, NJ 07430   Mr. … 378-88… premium</span></span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000013 2011-09-30 534 Iroquois Ave. Watertown, MA 02472  Dr. … 104-83… premium</span></span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1 more row, and abbreviated variable name ¹​phone_number</span></span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $issues</span></span>
+<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 50 × 4</span></span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     borrower_id isbn              date      </span></span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;             &lt;date&gt;    </span></span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 000019      0-676-97976-9     2015-03-17</span></span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000002 000010      978-0-7528-6053-4 2008-09-13</span></span>
+<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000003 000016      0-09-177373-3     2014-09-28</span></span>
+<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000004 000005      0-224-06252-2     2005-11-14</span></span>
+<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000005 000004      0-340-89696-5     2006-03-19</span></span>
+<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 45 more rows</span></span>
+<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $returns</span></span>
+<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 30 × 2</span></span>
+<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id     date      </span></span>
+<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;date&gt;    </span></span>
+<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 000001 2015-04-06</span></span>
+<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 000003 2014-10-23</span></span>
+<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 000004 2005-12-29</span></span>
+<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 000005 2006-03-26</span></span>
+<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 000006 2016-08-30</span></span>
+<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 25 more rows</span></span>
+<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
+<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tblist&quot;</span></span>
+<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;call&quot;)</span></span>
+<span id="cb19-92"><a href="#cb19-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; as.tblist(librarian)</span></span></code></pre></div>
+<p><strong>Note.</strong> When <code>step_id</code> is not provided, the
+method returns the last step data.</p>
+<p><strong>Note.</strong> You may precise if you want to extract data
+before or after filtering using <code>state</code> parameter. Because
+the proceeding step uses result from the previous one, we have:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_data</span>(librarian_cohort, <span class="at">step_id =</span> <span class="dv">1</span>, <span class="at">state =</span> <span class="st">&quot;post&quot;</span>),</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_data</span>(librarian_cohort, <span class="at">step_id =</span> <span class="dv">2</span>, <span class="at">state =</span> <span class="st">&quot;pre&quot;</span>)</span>
@@ -629,7 +918,8 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <h2>Exploring the Cohort object methods</h2>
 <div id="learning-more-about-the-source-data" class="section level3">
 <h3>Learning more about the source data</h3>
-<p>Having Cohort object created, you may want to use its methods for exploring underlying data.</p>
+<p>Having Cohort object created, you may want to use its methods for
+exploring underlying data.</p>
 <p>With methods such as:</p>
 <ul>
 <li><code>stat</code>,</li>
@@ -664,18 +954,22 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $n_missing</span></span>
 <span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_data</span>(librarian_cohort, <span class="at">step_id =</span> <span class="dv">1</span>, <span class="at">filter_id =</span> <span class="st">&quot;program&quot;</span>)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_data</span>(librarian_cohort, <span class="at">step_id =</span> <span class="dv">2</span>, <span class="at">filter_id =</span> <span class="st">&quot;copies&quot;</span>)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attrition</span>(librarian_cohort, <span class="at">dataset =</span> <span class="st">&quot;books&quot;</span>)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attrition</span>(librarian_cohort, <span class="at">dataset =</span> <span class="st">&quot;borrowers&quot;</span>)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 <div id="sharing-code-and-reproducibility" class="section level3">
 <h3>Sharing code and reproducibility</h3>
-<p>The <code>cohortBuilder</code> package offers some methods to make sharing the workflow easier.</p>
-<p>With <code>code</code>, you may get the reproducible code written using methods operating on specific source (i.e. <code>dplyr</code> for <code>tblist</code> and <code>dbplyr</code> for <code>db</code> source):</p>
+<p>The <code>cohortBuilder</code> package offers some methods to make
+sharing the workflow easier.</p>
+<p>With <code>code</code>, you may get the reproducible code written
+using methods operating on specific source (i.e. <code>dplyr</code> for
+<code>tblist</code> and <code>dbplyr</code> for <code>db</code>
+source):</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">code</span>(librarian_cohort)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .pre_filtering &lt;- function(source, data_object, step_id) {</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     for (dataset in names(data_object)) {</span></span>
@@ -683,84 +977,170 @@ To do so, we have to define the following parameters calling <code>filter</code>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     return(data_object)</span></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source &lt;- list(dtconn = as.tblist(librarian))</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- source$dtconn</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # step 1</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; step_id &lt;- &quot;1&quot;</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .pre_filtering(source, data_object, step_id)</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;books&quot;]] &lt;- data_object[[&quot;books&quot;]] %&gt;%</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter(author %in% c(&quot;Dan Brown&quot;, NA))</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;books&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;borrowers&quot;]] &lt;- data_object[[&quot;borrowers&quot;]] %&gt;%</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter(program %in% &quot;premium&quot;)</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;borrowers&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # step 2</span></span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; step_id &lt;- &quot;2&quot;</span></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .pre_filtering(source, data_object, step_id)</span></span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;books&quot;]] &lt;- data_object[[&quot;books&quot;]] %&gt;%</span></span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter((copies &lt;= 5 &amp; copies &gt;= -Inf) | is.na(copies))</span></span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;books&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object</span></span></code></pre></div>
-<p>We can see above, the resulting code uses <code>source</code> object, which creation can be defined separately while creating it:</p>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .run_binding &lt;- function(source, binding_key, data_object_pre, data_object_post,</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ...) {</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     binding_dataset &lt;- binding_key$update$dataset</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dependent_datasets &lt;- names(binding_key$data_keys)</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     active_datasets &lt;- data_object_post %&gt;%</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         purrr::keep(~attr(., &quot;filtered&quot;)) %&gt;%</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         names()</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     if (!any(dependent_datasets %in% active_datasets)) {</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         return(data_object_post)</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     key_values &lt;- NULL</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     common_key_names &lt;- paste0(&quot;key_&quot;, seq_along(binding_key$data_keys[[1]]$key))</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     for (dependent_dataset in dependent_datasets) {</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         key_names &lt;- binding_key$data_keys[[dependent_dataset]]$key</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         tmp_key_values &lt;- dplyr::distinct(data_object_post[[dependent_dataset]][,</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             key_names, drop = FALSE]) %&gt;%</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             stats::setNames(common_key_names)</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         if (is.null(key_values)) {</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             key_values &lt;- tmp_key_values</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         } else {</span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             key_values &lt;- dplyr::inner_join(key_values, tmp_key_values, by = common_key_names)</span></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         }</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     data_object_post[[binding_dataset]] &lt;- dplyr::inner_join(switch(as.character(binding_key$post),</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         `FALSE` = data_object_pre[[binding_dataset]], `TRUE` = data_object_post[[binding_dataset]]),</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         key_values, by = stats::setNames(common_key_names, binding_key$update$key))</span></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     if (binding_key$activate) {</span></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         attr(data_object_post[[binding_dataset]], &quot;filtered&quot;) &lt;- TRUE</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     return(data_object_post)</span></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source &lt;- list(dtconn = as.tblist(librarian))</span></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- source$dtconn</span></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; step_id &lt;- &quot;1&quot;</span></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; pre_data_object &lt;- data_object</span></span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .pre_filtering(source, data_object, &quot;1&quot;)</span></span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;books&quot;]] &lt;- data_object[[&quot;books&quot;]] %&gt;%</span></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter(author %in% c(&quot;Dan Brown&quot;, NA))</span></span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;books&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;borrowers&quot;]] &lt;- data_object[[&quot;borrowers&quot;]] %&gt;%</span></span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter(program %in% &quot;premium&quot;)</span></span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;borrowers&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .post_filtering(source, data_object, &quot;1&quot;)</span></span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for (binding_key in binding_keys) {</span></span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     data_object &lt;- .run_binding(source, binding_key, pre_data_object, data_object)</span></span>
+<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
+<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; step_id &lt;- &quot;2&quot;</span></span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .pre_filtering(source, data_object, &quot;2&quot;)</span></span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;books&quot;]] &lt;- data_object[[&quot;books&quot;]] %&gt;%</span></span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter((copies &lt;= 5 &amp; copies &gt;= -Inf) | is.na(copies))</span></span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;books&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .post_filtering(source, data_object, &quot;2&quot;)</span></span></code></pre></div>
+<p>We can see above, the resulting code uses <code>source</code> object,
+which creation code can be defined separately while creating it:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>librarian_source <span class="ot">&lt;-</span> <span class="fu">set_source</span>(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.tblist</span>(librarian),</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">source_code =</span> <span class="fu">quote</span>({</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    source <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">attributes =</span> <span class="fu">list</span>(<span class="at">datasets =</span> librarian))</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="ot">&lt;-</span> librarian_source <span class="sc">%&gt;%</span> </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cohort</span>(</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step</span>(</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;discrete&quot;</span>, <span class="at">id =</span> <span class="st">&quot;author&quot;</span>, <span class="at">dataset =</span> <span class="st">&quot;books&quot;</span>, </span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">variable =</span> <span class="st">&quot;author&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Dan Brown&quot;</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;discrete&quot;</span>, <span class="at">id =</span> <span class="st">&quot;program&quot;</span>, <span class="at">dataset =</span> <span class="st">&quot;borrowers&quot;</span>, </span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">variable =</span> <span class="st">&quot;program&quot;</span>, <span class="at">value =</span> <span class="st">&quot;premium&quot;</span>, <span class="at">keep_na =</span> <span class="cn">FALSE</span></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step</span>(</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;range&quot;</span>, <span class="at">id =</span> <span class="st">&quot;copies&quot;</span>, <span class="at">dataset =</span> <span class="st">&quot;books&quot;</span>, </span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">variable =</span> <span class="st">&quot;copies&quot;</span>, <span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">5</span>)</span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">run_flow =</span> <span class="cn">TRUE</span></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="fu">code</span>(librarian_cohort)</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .pre_filtering &lt;- function(source, data_object, step_id) {</span></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     for (dataset in names(data_object)) {</span></span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         attr(data_object[[dataset]], &quot;filtered&quot;) &lt;- FALSE</span></span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     return(data_object)</span></span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source &lt;- list(attributes = list(datasets = librarian))</span></span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- source$dtconn</span></span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # step 1</span></span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; step_id &lt;- &quot;1&quot;</span></span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .pre_filtering(source, data_object, step_id)</span></span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;books&quot;]] &lt;- data_object[[&quot;books&quot;]] %&gt;%</span></span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter(author %in% c(&quot;Dan Brown&quot;, NA))</span></span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;books&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;borrowers&quot;]] &lt;- data_object[[&quot;borrowers&quot;]] %&gt;%</span></span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter(program %in% &quot;premium&quot;)</span></span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;borrowers&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
-<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # step 2</span></span>
-<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; step_id &lt;- &quot;2&quot;</span></span>
-<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .pre_filtering(source, data_object, step_id)</span></span>
-<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;books&quot;]] &lt;- data_object[[&quot;books&quot;]] %&gt;%</span></span>
-<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter((copies &lt;= 5 &amp; copies &gt;= -Inf) | is.na(copies))</span></span>
-<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;books&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
-<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object</span></span></code></pre></div>
-<p>The second option allows to restore cohort configuration using its state. The cohort state is a list (or json) storing information about all the steps and filters configuration.</p>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    source <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    source<span class="sc">$</span>dtconn <span class="ot">&lt;-</span> <span class="fu">as.tblist</span>(librarian)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="ot">&lt;-</span> librarian_source <span class="sc">%&gt;%</span> </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cohort</span>(</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step</span>(</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;discrete&quot;</span>, <span class="at">id =</span> <span class="st">&quot;author&quot;</span>, <span class="at">dataset =</span> <span class="st">&quot;books&quot;</span>, </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">variable =</span> <span class="st">&quot;author&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Dan Brown&quot;</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;discrete&quot;</span>, <span class="at">id =</span> <span class="st">&quot;program&quot;</span>, <span class="at">dataset =</span> <span class="st">&quot;borrowers&quot;</span>, </span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">variable =</span> <span class="st">&quot;program&quot;</span>, <span class="at">value =</span> <span class="st">&quot;premium&quot;</span>, <span class="at">keep_na =</span> <span class="cn">FALSE</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step</span>(</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;range&quot;</span>, <span class="at">id =</span> <span class="st">&quot;copies&quot;</span>, <span class="at">dataset =</span> <span class="st">&quot;books&quot;</span>, </span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">variable =</span> <span class="st">&quot;copies&quot;</span>, <span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">5</span>)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">run_flow =</span> <span class="cn">TRUE</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a><span class="fu">code</span>(librarian_cohort)</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .pre_filtering &lt;- function(source, data_object, step_id) {</span></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     for (dataset in names(data_object)) {</span></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         attr(data_object[[dataset]], &quot;filtered&quot;) &lt;- FALSE</span></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     return(data_object)</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .run_binding &lt;- function(source, binding_key, data_object_pre, data_object_post,</span></span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ...) {</span></span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     binding_dataset &lt;- binding_key$update$dataset</span></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dependent_datasets &lt;- names(binding_key$data_keys)</span></span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     active_datasets &lt;- data_object_post %&gt;%</span></span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         purrr::keep(~attr(., &quot;filtered&quot;)) %&gt;%</span></span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         names()</span></span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     if (!any(dependent_datasets %in% active_datasets)) {</span></span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         return(data_object_post)</span></span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     key_values &lt;- NULL</span></span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     common_key_names &lt;- paste0(&quot;key_&quot;, seq_along(binding_key$data_keys[[1]]$key))</span></span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     for (dependent_dataset in dependent_datasets) {</span></span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         key_names &lt;- binding_key$data_keys[[dependent_dataset]]$key</span></span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         tmp_key_values &lt;- dplyr::distinct(data_object_post[[dependent_dataset]][,</span></span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             key_names, drop = FALSE]) %&gt;%</span></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             stats::setNames(common_key_names)</span></span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         if (is.null(key_values)) {</span></span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             key_values &lt;- tmp_key_values</span></span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         } else {</span></span>
+<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             key_values &lt;- dplyr::inner_join(key_values, tmp_key_values, by = common_key_names)</span></span>
+<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         }</span></span>
+<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
+<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     data_object_post[[binding_dataset]] &lt;- dplyr::inner_join(switch(as.character(binding_key$post),</span></span>
+<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         `FALSE` = data_object_pre[[binding_dataset]], `TRUE` = data_object_post[[binding_dataset]]),</span></span>
+<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         key_values, by = stats::setNames(common_key_names, binding_key$update$key))</span></span>
+<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     if (binding_key$activate) {</span></span>
+<span id="cb27-64"><a href="#cb27-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         attr(data_object_post[[binding_dataset]], &quot;filtered&quot;) &lt;- TRUE</span></span>
+<span id="cb27-65"><a href="#cb27-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     }</span></span>
+<span id="cb27-66"><a href="#cb27-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     return(data_object_post)</span></span>
+<span id="cb27-67"><a href="#cb27-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
+<span id="cb27-68"><a href="#cb27-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source &lt;- list()</span></span>
+<span id="cb27-69"><a href="#cb27-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source$dtconn &lt;- as.tblist(librarian)</span></span>
+<span id="cb27-70"><a href="#cb27-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- source$dtconn</span></span>
+<span id="cb27-71"><a href="#cb27-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; step_id &lt;- &quot;1&quot;</span></span>
+<span id="cb27-72"><a href="#cb27-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; pre_data_object &lt;- data_object</span></span>
+<span id="cb27-73"><a href="#cb27-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .pre_filtering(source, data_object, &quot;1&quot;)</span></span>
+<span id="cb27-74"><a href="#cb27-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;books&quot;]] &lt;- data_object[[&quot;books&quot;]] %&gt;%</span></span>
+<span id="cb27-75"><a href="#cb27-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter(author %in% c(&quot;Dan Brown&quot;, NA))</span></span>
+<span id="cb27-76"><a href="#cb27-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;books&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
+<span id="cb27-77"><a href="#cb27-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;borrowers&quot;]] &lt;- data_object[[&quot;borrowers&quot;]] %&gt;%</span></span>
+<span id="cb27-78"><a href="#cb27-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter(program %in% &quot;premium&quot;)</span></span>
+<span id="cb27-79"><a href="#cb27-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;borrowers&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
+<span id="cb27-80"><a href="#cb27-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .post_filtering(source, data_object, &quot;1&quot;)</span></span>
+<span id="cb27-81"><a href="#cb27-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for (binding_key in binding_keys) {</span></span>
+<span id="cb27-82"><a href="#cb27-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     data_object &lt;- .run_binding(source, binding_key, pre_data_object, data_object)</span></span>
+<span id="cb27-83"><a href="#cb27-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
+<span id="cb27-84"><a href="#cb27-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; step_id &lt;- &quot;2&quot;</span></span>
+<span id="cb27-85"><a href="#cb27-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .pre_filtering(source, data_object, &quot;2&quot;)</span></span>
+<span id="cb27-86"><a href="#cb27-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object[[&quot;books&quot;]] &lt;- data_object[[&quot;books&quot;]] %&gt;%</span></span>
+<span id="cb27-87"><a href="#cb27-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     dplyr::filter((copies &lt;= 5 &amp; copies &gt;= -Inf) | is.na(copies))</span></span>
+<span id="cb27-88"><a href="#cb27-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attr(data_object[[&quot;books&quot;]], &quot;filtered&quot;) &lt;- TRUE</span></span>
+<span id="cb27-89"><a href="#cb27-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data_object &lt;- .post_filtering(source, data_object, &quot;2&quot;)</span></span></code></pre></div>
+<p>What’s more, you can manipulate the output with additional
+arguments:</p>
+<ul>
+<li><code>include_methods</code> - list of methods names which
+definition should be printed in output,</li>
+<li><code>include_action</code> - list of actions names (such as
+“pre_filtering”) that should be included in output,</li>
+<li><code>modifier</code> - a custom modifier of data.frame storing
+reproducible code parts,</li>
+<li><code>mark_step</code> - should step ID be presented in output.</li>
+</ul>
+<p>The second option for achieving reproducibility allows to restore
+cohort configuration using its state. The cohort state is a list (or
+json) storing information about all the steps and filters
+configuration.</p>
 <p>You may get the state with <code>get_state</code> method:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span> <span class="fu">get_state</span>(librarian_cohort, <span class="at">json =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>state</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [{&quot;step&quot;:&quot;1&quot;,&quot;filters&quot;:[{&quot;type&quot;:&quot;discrete&quot;,&quot;id&quot;:&quot;author&quot;,&quot;name&quot;:&quot;author&quot;,&quot;variable&quot;:&quot;author&quot;,&quot;value&quot;:&quot;Dan Brown&quot;,&quot;dataset&quot;:&quot;books&quot;,&quot;keep_na&quot;:true,&quot;description&quot;:null,&quot;active&quot;:true},{&quot;type&quot;:&quot;discrete&quot;,&quot;id&quot;:&quot;program&quot;,&quot;name&quot;:&quot;program&quot;,&quot;variable&quot;:&quot;program&quot;,&quot;value&quot;:&quot;premium&quot;,&quot;dataset&quot;:&quot;borrowers&quot;,&quot;keep_na&quot;:false,&quot;description&quot;:null,&quot;active&quot;:true}]},{&quot;step&quot;:&quot;2&quot;,&quot;filters&quot;:[{&quot;type&quot;:&quot;range&quot;,&quot;id&quot;:&quot;copies&quot;,&quot;name&quot;:&quot;copies&quot;,&quot;variable&quot;:&quot;copies&quot;,&quot;range&quot;:[&quot;-Inf&quot;,5],&quot;dataset&quot;:&quot;books&quot;,&quot;keep_na&quot;:true,&quot;description&quot;:null,&quot;active&quot;:true}]}]</span></span></code></pre></div>
-<p>Then, having an empty cohort, use <code>restore</code> to apply the configuration:</p>
+<p>Then, having an empty cohort, use <code>restore</code> to apply the
+configuration:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>librarian_cohort <span class="ot">&lt;-</span> librarian_source <span class="sc">%&gt;%</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cohort</span>()</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>

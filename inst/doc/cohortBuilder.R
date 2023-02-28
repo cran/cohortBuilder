@@ -135,7 +135,8 @@ code(librarian_cohort)
 librarian_source <- set_source(
   as.tblist(librarian),
   source_code = quote({
-    source <- list(attributes = list(datasets = librarian))
+    source <- list()
+    source$dtconn <- as.tblist(librarian)
   })
 )
 

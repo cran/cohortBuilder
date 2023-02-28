@@ -11,8 +11,8 @@ library(cohortBuilder)
 #  set_source.tblist <- function(dtconn, primary_keys = NULL, binding_keys = NULL,
 #                             source_code = NULL, description = NULL, ...) {
 #    Source$new(
-#      dtconn, primary_keys = primary_keys,
-#      binding_keys = binding_keys, source_code = source_code,
+#      dtconn, primary_keys = primary_keys, binding_keys = binding_keys,
+#      source_code = source_code, description = description,
 #      ...
 #    )
 #  }
@@ -50,12 +50,8 @@ library(cohortBuilder)
 #    purrr::map(
 #      stats::setNames(source$dtconn$tables, source$dtconn$tables),
 #      function(table) {
-#        table_name <- tmp_table_name(attr(data_object[[table]], "tbl_name"), step_id)
-#        DBI::dbRemoveTable(source$dtconn$connection, table_name, temporary = TRUE, fail_if_missing = FALSE)
-#        data_object[[table]] <- dplyr::compute(
-#          data_object[[table]],
-#          name = table_name
-#        )
+#        table_name <- tmp_table_name(table, step_id)
+#        DBI::dbRemoveTable(source$dtconn$conn, table_name, temporary = TRUE, fail_if_missing = FALSE)
 #        attr(data_object[[table]], "filtered") <- FALSE
 #        return(data_object[[table]])
 #      }
