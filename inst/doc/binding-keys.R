@@ -3,7 +3,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-options("tibble.print_min" = 5, "tibble.print_max" = 5)
+options("tibble.print_min" = 5L, "tibble.print_max" = 5L)
 library(magrittr)
 library(cohortBuilder)
 
@@ -15,15 +15,17 @@ librarian_source <- set_source(
   as.tblist(librarian)
 )
 
-librarian_cohort <- librarian_source %>% 
+librarian_cohort <- librarian_source %>%
   cohort(
     step(
       filter(
-        "discrete", id = "title", dataset = "books", 
+        "discrete",
+        id = "title", dataset = "books",
         variable = "title", value = "Birdsong"
       ),
       filter(
-        "date_range", id = "issue_date", dataset = "issues", 
+        "date_range",
+        id = "issue_date", dataset = "issues",
         variable = "date", range = c(as.Date("2016-01-01"), as.Date("2016-12-31"))
       )
     )
@@ -32,20 +34,19 @@ librarian_cohort <- librarian_source %>%
 ## -----------------------------------------------------------------------------
 run(librarian_cohort)
 selected_isbn <- get_data(librarian_cohort)$books$isbn
-librarian_cohort %->% 
+librarian_cohort %->%
   step(
-    filter("discrete", id = "isbn", dataset = "issues", variable = "isbn", value = selected_isbn)  
-  ) %>% 
-  run(step_id = 2)
+    filter("discrete", id = "isbn", dataset = "issues", variable = "isbn", value = selected_isbn)
+  ) %>%
+  run(step_id = 2L)
 
 ## -----------------------------------------------------------------------------
 selected_borrower_id <- get_data(librarian_cohort)$issues$borrower_id
-librarian_cohort %->% 
+librarian_cohort %->%
   step(
-    filter("discrete", id = "borr_id", dataset = "borrowers", variable = "id", value = selected_borrower_id)  
-  ) %>% 
-  run(step_id = 3)
-
+    filter("discrete", id = "borr_id", dataset = "borrowers", variable = "id", value = selected_borrower_id)
+  ) %>%
+  run(step_id = 3L)
 
 ## -----------------------------------------------------------------------------
 get_data(librarian_cohort)$borrowers
@@ -74,15 +75,17 @@ librarian_source <- set_source(
   binding_keys = case_bks
 )
 
-librarian_cohort <- librarian_source %>% 
+librarian_cohort <- librarian_source %>%
   cohort(
     step(
       filter(
-        "discrete", id = "title", dataset = "books", 
+        "discrete",
+        id = "title", dataset = "books",
         variable = "title", value = "Birdsong"
       ),
       filter(
-        "date_range", id = "issue_date", dataset = "issues", 
+        "date_range",
+        id = "issue_date", dataset = "issues",
         variable = "date", range = c(as.Date("2016-01-01"), as.Date("2016-12-31"))
       )
     )

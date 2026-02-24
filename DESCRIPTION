@@ -1,7 +1,7 @@
 Package: cohortBuilder
 Type: Package
 Title: Data Source Agnostic Filtering Tools
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: 
     c(person('Krystian', 'Igras', 
              email = 'krystian8207@gmail.com', 
@@ -16,10 +16,11 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: R6, jsonlite, purrr, tibble, dplyr (>= 1.0.0), tidyr,
-        magrittr, glue, ggplot2, rlang (>= 1.0), formatR
+        magrittr, glue, ggplot2, rlang (>= 1.0), formatR, collapse
 KeepSource: true
-RoxygenNote: 7.2.3
-Suggests: queryBuilder, testthat (>= 3.0.0), shiny, knitr, rmarkdown
+RoxygenNote: 7.3.3
+Suggests: queryBuilder, vdiffr, testthat (>= 3.0.0), shiny, knitr,
+        rmarkdown
 Config/testthat/edition: 3
 Collate: 'cohortBuilder-package.R' 'cohort_methods.R'
         'source_methods.R' 'step.R' 'filter.R' 'attrition.R'
@@ -30,8 +31,8 @@ URL: https://github.com/r-world-devs/cohortBuilder/,
         https://r-world-devs.github.io/cohortBuilder/
 Depends: R (>= 3.5.0)
 NeedsCompilation: no
-Packaged: 2024-09-25 11:59:10 UTC; krystiai
+Packaged: 2026-02-24 14:37:47 UTC; krystiai
 Author: Krystian Igras [cre, aut],
   Adam Foryś [ctb]
 Repository: CRAN
-Date/Publication: 2024-09-25 13:00:02 UTC
+Date/Publication: 2026-02-24 16:30:17 UTC
